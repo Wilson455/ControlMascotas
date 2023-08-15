@@ -31,7 +31,7 @@ if (!isset($_SESSION['Usuario'])) {
             <div class="row">
                 <div>
                     <div class="page-header">
-                        <h2>Crear registro</h2>
+                        <h2>Formulario</h2>
                     </div>
                 </div>
             </div>
@@ -39,52 +39,30 @@ if (!isset($_SESSION['Usuario'])) {
                 <form>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="hidden" class="form-control" id="idComponente" placeholder="Ingrese el nombre" style="border-radius: 0.5rem !important;">
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" class="form-control" id="Nombre" placeholder="Ingrese el nombre" style="border-radius: 0.5rem !important;">
+                            <label for="exampleInput1">Nombre</label>
+                            <input type="text" class="form-control" id="exampleInput1" placeholder="Ingrese el nombre" style="border-radius: 0.5rem !important;">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="form-group">
+                            <label for="exampleInput1">Edad</label>
+                            <input type="text" class="form-control" id="exampleInput1" placeholder="Ingrese la edad" style="border-radius: 0.5rem !important;">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="Marca">Marca</label>
-                            <input type="text" class="form-control" id="Marca" placeholder="Ingrese la marca" style="border-radius: 0.5rem !important;">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="Modelo">Modelo</label>
-                            <input type="text" class="form-control" id="Modelo" placeholder="Ingrese el modelo" style="border-radius: 0.5rem !important;">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="Serial">Serial</label>
-                            <input type="text" class="form-control" id="Serial" placeholder="Ingrese el serial" style="border-radius: 0.5rem !important;">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdSolicitante">IdSolicitante</label>
-                            <input type="text" class="form-control" id="IdSolicitante" placeholder="Ingrese el id del solicitante" style="border-radius: 0.5rem !important;">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdEncargado">IdEncargado</label>
-                            <input type="text" class="form-control" id="IdEncargado" placeholder="Ingrese el id del encargado" style="border-radius: 0.5rem !important;">
+                            <label for="exampleInputEmail1">Correo</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese el correo" style="border-radius: 0.5rem !important;">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Estado</label>
-                            <select class="form-control" id="IdEstado" style="border-radius: 0.5rem !important;">
+                            <select class="form-control" id="exampleFormControlSelect1" style="border-radius: 0.5rem !important;">
+                            <option>Disponible</option>
+                            <option>Devuelto</option>
+                            <option>Dañado</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-12" style="text-align: center;">
-                        <div class="form-group">
-                            <button class="btn btn-success" id="btnGuardar">Guardar</button>
                         </div>
                     </div>
                 </form>

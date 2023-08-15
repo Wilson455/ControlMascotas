@@ -13,18 +13,11 @@ class CapturaInformacion {
 
 
 	
-	public function getDatosUsuario($_usuario) {
+	 public function getDatosUsuario($_usuario) {
         $sql = "SELECT Usuario, Nombre
                 FROM Usuario
                 WHERE Usuario = '" . $_usuario . "'";
         $data = $this->database->query(utf8_decode($sql));
-
-        return $data;
-    }
-
-    public function saveInsert() {
-        $sql = "INSERT INTO [Componente] ([Nombre],[Marca],[Modelo],[Serial],[IdEstado],[IdSolicitante],[IdEncargado],[Fecha]) VALUES ('1','1','1','1','1','1','1',GETDATE())";
-        $data = $this->database->Insert($sql);
 
         return $data;
     }

@@ -1,34 +1,45 @@
 <?php
 
 session_start();
-require_once('../class/CapturaInformacionOracle.class.php');
 require_once('../class/CapturaInformacion.class.php');
 require_once('../class/XML.class.php');
 
 switch ($_POST['metodo']) {
-    case 'getEstados':
-        XML::xmlResponse(getEstados());
+    case 'getTipoSolicitante':
+        XML::xmlResponse(getTipoSolicitante());
+        break;	
+	case 'getTipoReclamoUsuario':
+        XML::xmlResponse(getTipoReclamoUsuario());
         break;
-    case 'getListaComponentes':
-        XML::xmlResponse(getListaComponentes());
+    case 'getTipoReclamoCorresponsal':
+        XML::xmlResponse(getTipoReclamoCorresponsal());
         break;
-    case 'getConteoComponentes':
-        XML::xmlResponse(getConteoComponentes());
+    case 'getTipoReclamoPorId':
+        XML::xmlResponse(getTipoReclamoPorId($_POST['Id']));
         break;
-    case 'saveGuardarComponentes':
-        XML::xmlResponse(saveGuardarComponentes($_POST['nombre'], $_POST['marca'], $_POST['modelo'], $_POST['serial'], $_POST['idEstado'], $_POST['idSolicitante'], $_POST['idEncargado']));
+    case 'getTipoCta':
+        XML::xmlResponse(getTipoCta());
         break;
-    case 'getActualizarComponente':
-        XML::xmlResponse(getActualizarComponente($_POST['id'], $_POST['nombre'], $_POST['marca'],$_POST['modelo'],$_POST['serial'],$_POST['idEstado'],$_POST['idSolicitante'],$_POST['idEncargado']));
+    case 'getTipoTransaccion':
+        XML::xmlResponse(getTipoTransaccion());
         break;
-    case 'getDatosComponente':
-        XML::xmlResponse(getDatosComponente($_POST['id']));
+    case 'getBanco':
+        XML::xmlResponse(getBanco());
+        break;
+    case 'getDepartamentos':
+        XML::xmlResponse(getDepartamentos());
+        break;
+    case 'getCiudades':
+        XML::xmlResponse(getCiudades($_POST['slcDepartamento']));
+        break;
+    case 'GuardarForm1':
+        XML::xmlResponse(GuardarForm1($_POST['txtNombre'], $_POST['slcTipoSolicitante'], $_POST['txtCedula'], $_POST['txtDireccion'], $_POST['txtCelular'], $_POST['txtCorreo'], $_POST['slcTipoReclamoNvl1'], $_POST['slcTipoReclamoNvl2'], $_POST['txtFechaTran1'], $_POST['txtHoraTran1'], $_POST['txtIdenTerminal1'], $_POST['txtNumTran1'], $_POST['txtNomConvenioCorr'], $_POST['txtNomConvenioErr'], $_POST['txtValorTran1'], $_POST['txtNumReferancia1'], $_POST['txtNumCuentaAbono1'],  $_POST['txtNomConvenio2'], $_POST['txtNumReferanciaErr'],$_POST['txtNumReferanciaCorr'], $_POST['slcTipoCta1'], $_POST['slcBanco1'], $_POST['txtNombreTitu1'], $_POST['txtCedulaTitu1'], $_POST['Usuario'], $_POST['Nombre'], $_POST['slcCiudad'], $_POST['slcDepartamento'], $_POST['txtObservacion']));
         break;
 }
 
-function getEstados() {
-    $captura = new CapturaInformacionOracle();
-    $data = $captura->getEstados();
+function getTipoSolicitante() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTipoSolicitante();
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
@@ -37,91 +48,113 @@ function getEstados() {
     return $xml;
 }
 
-function getListaComponentes() {
-    $captura = new CapturaInformacionOracle();
-    $data = $captura->getListaComponentes();
+function getTipoReclamoUsuario() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTipoReclamoUsuario();
     if ($data) {
-        $xml .= "";
-        for($i = 0; $i < count($data); $i++){
-            $xml .= "<registro
-                        ID='".$data[$i]['ID']."'
-                        NOMBRE='".$data[$i]['NOMBRE']."'
-                        MARCA='".$data[$i]['MARCA']."'
-                        MODELO='".$data[$i]['MODELO']."'
-                        SERIAL='".$data[$i]['SERIAL']."'
-                        ESTADO='".$data[$i]['ESTADO']."'
-                        IDSOLICITANTE='".$data[$i]['IDSOLICITANTE']."'
-                        IDENCARGADO='".$data[$i]['IDENCARGADO']."'
-                    >EXITOSO</registro>";
-        }
-       
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
         $xml = "<registro>NOEXITOSO</registro>";
     }
     return $xml;
 }
 
-function getConteoComponentes() {
-    $captura = new CapturaInformacionOracle();
-    $data = $captura->getConteoComponentes();
+function getTipoReclamoCorresponsal() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTipoReclamoCorresponsal();
     if ($data) {
-        $xml .= "";
-        for($i = 0; $i < count($data); $i++){
-            $xml .= "<registro
-                        NOMBRE='".$data[$i]['NOMBRE']."'
-                        MARCA='".$data[$i]['MARCA']."'
-                        MODELO='".$data[$i]['MODELO']."'
-                        ESTADO='".$data[$i]['ESTADO']."'
-                        CONTEO='".$data[$i]['CONTEO']."'
-                    >EXITOSO</registro>";
-        }
-       
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
         $xml = "<registro>NOEXITOSO</registro>";
     }
     return $xml;
 }
 
-function saveGuardarComponentes($nombre, $marca, $modelo, $serial, $idEstado, $idSolicitante, $idEncargado) {    
-    $captura = new CapturaInformacionOracle();
-    $data = $captura->saveGuardarComponente($nombre, $marca, $modelo, $serial, $idEstado, $idSolicitante, $idEncargado);
-
-    $xml = "";
+function getTipoReclamoPorId($Id) {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTipoReclamoPorId($Id);
     if ($data) {
-        $xml .= "<registro><![CDATA[". $data ."]]></registro>";
-    } else {
-        $xml .= "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-
-function getDatosComponente($id) {    
-    $captura = new CapturaInformacionOracle();
-    $data = $captura->getDatosComponente($id);
-
-    $xml = "";
-
-    if ($data) {
-        for ($i=0; $i < count($data); $i++) { 
-            $xml .= "<registro nombre='" . $data[$i]['NOMBRE'] . "' marca='" . $data[$i]['MARCA'] . "' modelo='" . $data[$i]['MODELO'] . "' serial='" . $data[$i]['SERIAL'] . "' idEstado='" . $data[$i]['IDESTADO'] . "' idSolicitante='" . $data[$i]['IDSOLICITANTE'] . "' idEncargado='" . $data[$i]['IDENCARGADO'] . "'><![CDATA[". $data[$i]['ID'] ."]]></registro>";
-        }
-    } else {
-        $xml .= "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-
-function getActualizarComponente($id, $nombre, $marca, $modelo, $serial, $idEstado, $idSolicitante, $idEncargado) {
-    $captura = new CapturaInformacionOracle();
-    $data = $captura->getActualizarComponente($id, $nombre, $marca, $modelo, $serial, $idEstado, $idSolicitante, $idEncargado);
-
-    if ($data) {
-        $xml = "<registro>EXITOSO</registro>";
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
         $xml = "<registro>NOEXITOSO</registro>";
     }
     return $xml;
 }
 
+function getTipoCta() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTipoCta();
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function getTipoTransaccion() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTipoTransaccion();
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+function getTiposlcRetiro() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getTiposlcRetiro();
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function getBanco() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getBanco();
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function getDepartamentos() {
+    $captura = new CapturaInformacion();
+    $data = $captura->getDepartamentos();
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function getCiudades($slcDepartamento) {
+    $captura = new CapturaInformacion();
+    $data = $captura->getCiudades($slcDepartamento);
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function GuardarForm1($txtNombre, $slcTipoSolicitante, $txtCedula, $txtDireccion, $txtCelular, $txtCorreo, $slcTipoReclamoNvl1, $slcTipoReclamoNvl2, $txtFechaTran1, $txtHoraTran1, $txtIdenTerminal1, $txtNumTran1, $txtNomConvenioCorr, $txtNomConvenioErr, $txtValorTran1, $txtNumReferancia1, $txtNumCuentaAbono1,$txtNomConvenio2,$txtNumReferanciaErr,$txtNumReferanciaCorr, $slcTipoCta1, $slcBanco1, $txtNombreTitu1, $txtCedulaTitu1, $Usuario, $Nombre, $slcCiudad, $slcDepartamento, $txtObservacion) {
+    $captura = new CapturaInformacion();
+    $data = $captura->GuardarForm1($txtNombre, $slcTipoSolicitante, $txtCedula, $txtDireccion, $txtCelular, $txtCorreo, $slcTipoReclamoNvl1, $slcTipoReclamoNvl2, $txtFechaTran1, $txtHoraTran1, $txtIdenTerminal1, $txtNumTran1, $txtNomConvenioCorr, $txtNomConvenioErr, $txtValorTran1, $txtNumReferancia1, $txtNumCuentaAbono1,$txtNomConvenio2,$txtNumReferanciaErr,$txtNumReferanciaCorr, $slcTipoCta1, $slcBanco1, $txtNombreTitu1, $txtCedulaTitu1, $Usuario, $Nombre, $slcCiudad, $slcDepartamento, $txtObservacion);
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
 ?>
 
