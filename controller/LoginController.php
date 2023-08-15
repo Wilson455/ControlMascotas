@@ -1,16 +1,16 @@
 <?php
 
 session_start();
-require_once('../class/CapturaInformacionUsuario.class.php');
+require_once('../class/CapturaInformacion.class.php');
 $captura = new CapturaInformacion;
 
 $_SESSION['Usuario'] = htmlentities($_POST['usuario']);
 $clave = htmlentities($_POST['password']);
 
-$sql = "SELECT  Usuario as nombre
+$sql = "SELECT  NombreCompleto as nombre
         FROM    Usuario 
-        WHERE   Usuario = '" . $_SESSION['Usuario'] . "' 
-         AND ClaveIn = '" . $clave . "'";
+        WHERE   CorreoElectronico = '" . $_SESSION['Usuario'] . "' 
+         AND Clave = '" . $clave . "'";
 $data = $captura->database->query(utf8_decode($sql));
 
 

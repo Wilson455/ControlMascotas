@@ -5,7 +5,7 @@ session_start();
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Login Plantilla</title>
+        <title>Control de Mascotas</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script src="js/jquery-3.5.1.js"></script>     
@@ -22,7 +22,7 @@ session_start();
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 logo">
-                    <h1>Plantilla PHP</h1>
+                    <h1>Control de Mascotas</h1>
                 </div>
             </div>
             <div class="row">
@@ -53,7 +53,10 @@ session_start();
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-md-offset-4 col-md-6">
+                                    <div class="col-md-offset-4 col-md-3">
+                                        <button type="submit" name="btnRegistrar" value="Registrar" class="btn btn-primary pull-right" >Registrar <span class="glyphicon glyphicon-log-in"></span></button>
+                                    </div>
+                                    <div class="col-md-3">
                                         <button type="submit" name="btnLogin" value="Ingresar" class="btn btn-primary pull-right" >Ingresar <span class="glyphicon glyphicon-log-in"></span></button>
                                     </div>
                                 </div>

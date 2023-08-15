@@ -14,8 +14,8 @@ if (!isset($_SESSION['Usuario'])) {
     if (sizeof($result) == 0) {
 //        header('Location: pages/AccesoDenegado.php');
     } else {
-        $usuario = utf8_encode($result[0]['Usuario']);
-        $nombre = utf8_encode($result[0]['Nombre']);
+        $correoElectronico = utf8_encode($result[0]['CorreoElectronico']);
+        $nombreCompleto = utf8_encode($result[0]['NombreCompleto']);
         $perfil = 'prueba';
         //$menu = $modulo->getMenuCompleto($result[0]['perfil']);
         ?>
@@ -23,7 +23,7 @@ if (!isset($_SESSION['Usuario'])) {
         <html>
             <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-                <title>Plantilla</title>
+                <title>Control de Mascotas</title>
                 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
                 <!--<link href="css/jquery.dataTables.css" rel="stylesheet" type="text/css" />-->
                 <link href="css/site.css" rel="stylesheet" type="text/css" />
@@ -58,7 +58,7 @@ if (!isset($_SESSION['Usuario'])) {
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <a href="#">
-                                <label style="font-size: 25px;color:#fff; padding-top: 7px;">Plantilla PHP</label>
+                                <label style="font-size: 25px;color:#fff; padding-top: 7px;">Control de Mascotas</label>
                             </a>
                             <button type="button" id="sidebarCollapse" class="btn btn-info">
                                 <i class="fa fa-bars"></i>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['Usuario'])) {
                                 <li class="dropdown user user-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="glyphicon glyphicon-user"></i>
-                                        <span><?php echo $usuario ?><i class="caret"></i></span>
+                                        <span><?php echo $correoElectronico ?><i class="caret"></i></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- User image -->
@@ -78,7 +78,7 @@ if (!isset($_SESSION['Usuario'])) {
                                             <br/>
                                             <br/>
                                             <p>
-                                                <font color='#0C223F'><?php echo $nombre; ?></font>
+                                                <font color='#0C223F'><?php echo $nombreCompleto; ?></font>
                                             </p>
                                         </li>                                
                                         <!-- Menu Footer-->
@@ -97,7 +97,7 @@ if (!isset($_SESSION['Usuario'])) {
                     <div id="sidebar" class="menu-lateral sidebar">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <p><strong>Hola, <?php echo $nombre; ?></strong></p>
+                                <p><strong>Hola, <?php echo $nombreCompleto; ?></strong></p>
                                 <span style="display: none;"><i class="fa fa-circle text-success"></i> En linea</span>
                             </li>
                             <ul class="sidebar-menu">

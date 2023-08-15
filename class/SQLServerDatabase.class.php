@@ -6,7 +6,7 @@ class SQLServerDatabase implements IDataBase {
 
     //  Pruoduccion
     var $host = "localhost\\SQLEXPRESS";
-    var $database = "Prueba";
+    var $database = "ProyectoIngenieriaSoftware";
     var $user = "usr_microservices";
     var $pass = "123456789";
    

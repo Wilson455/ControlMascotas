@@ -14,9 +14,9 @@ class CapturaInformacion {
 
 	
 	 public function getDatosUsuario($_usuario) {
-        $sql = "SELECT Usuario, Nombre
+        $sql = "SELECT CorreoElectronico, NombreCompleto
                 FROM Usuario
-                WHERE Usuario = '" . $_usuario . "'";
+                WHERE CorreoElectronico = '" . $_usuario . "'";
         $data = $this->database->query(utf8_decode($sql));
 
         return $data;
