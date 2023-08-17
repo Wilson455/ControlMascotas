@@ -104,15 +104,22 @@ if (!isset($_SESSION['Usuario'])) {
                                 <!--Aca se carga el menu php-->
                                 <li  id="1">
                                     <li>
-                                        <a  class="Bloqueo" target="centerframe" href="modulos/plantilla-tabla/plantilla-tabla.php">
-                                            <i class="fa fa-table"></i> <span>Menú Tabla</span>
+                                        <a class="Bloqueo" target="centerframe" href="modulos/usuario/perfil/perfil.php">
+                                            <i class="fa fa-user"></i> <span>Perfil</span>
                                         </a>
                                     </li>
                                 </li>
                                 <li  id="2">
                                     <li>
-                                        <a  class="Bloqueo" target="centerframe" href="modulos/plantilla-formulario/plantilla-formulario.php">
-                                            <i class="fa fa-list"></i> <span>Menú Formulario</span>
+                                        <a class="Bloqueo" target="centerframe" href="modulos/mascota/listar/listar.php">
+                                            <i class="fa fa-paw"></i> <span>Mascotas</span>
+                                        </a>
+                                    </li>
+                                </li>
+                                <li  id="3">
+                                    <li>
+                                        <a class="Bloqueo" target="centerframe" href="modulos/plantilla-formulario/plantilla-formulario.php">
+                                            <i class="fa fa-list"></i> <span>Reportes</span>
                                         </a>
                                     </li>
                                 </li>

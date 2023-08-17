@@ -1,5 +1,8 @@
-$(document).ready(function () {
-    $('#example').DataTable({
+$(document).ready(function () {    
+    $('#listarMascotas').DataTable({
+        destroy: true,
+        ordering: false,
+        bLengthChange: false,
         language: {
             "decimal": "",
             "emptyTable": "No hay información",
@@ -22,3 +25,6 @@ $(document).ready(function () {
         },
     });
 });
+function registrar() {
+    window.location = "../registrar/registrar.php";
+}

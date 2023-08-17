@@ -17,6 +17,11 @@ session_start();
                 text-align: center;
             }
         </style>
+        <script>
+            function registrar() {
+                window.location.href = "http://localhost:9990/ControlMascotas/modulos/usuario/registrar/registrar.php";
+            }
+        </script>
     </head>
     <body>
         <div class="container-fluid">
@@ -54,7 +59,7 @@ session_start();
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-offset-4 col-md-3">
-                                        <button type="submit" name="btnRegistrar" value="Registrar" class="btn btn-primary pull-right" >Registrar <span class="glyphicon glyphicon-log-in"></span></button>
+                                        <button type="button" name="btnRegistrar" value="Registrar" onclick="registrar()" class="btn btn-primary pull-right" >Registrar <span class="glyphicon glyphicon-log-in"></span></button>
                                     </div>
                                     <div class="col-md-3">
                                         <button type="submit" name="btnLogin" value="Ingresar" class="btn btn-primary pull-right" >Ingresar <span class="glyphicon glyphicon-log-in"></span></button>
@@ -80,5 +85,6 @@ session_start();
                 });
             <?php } ?>
         </script>
+        
     </body>
 </html>
