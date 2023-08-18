@@ -17,6 +17,7 @@ if (!isset($_SESSION['Usuario'])) {
         $correoElectronico = utf8_encode($result[0]['CorreoElectronico']);
         $nombreCompleto = utf8_encode($result[0]['NombreCompleto']);
         $perfil = 'prueba';
+        $_SESSION['idUsuario'] = utf8_encode($result[0]['Id']);
         //$menu = $modulo->getMenuCompleto($result[0]['perfil']);
         ?>
         <!DOCTYPE html>

@@ -26,6 +26,7 @@ if (!isset($_SESSION['Usuario'])) {
         <script src="js/listar.js" type="text/javascript"></script>
     </head>
     <body>
+        <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
         <div class="container">
             <div class="row">
                 <div style="text-align: center;">
@@ -38,8 +39,10 @@ if (!isset($_SESSION['Usuario'])) {
                 <table id="listarMascotas" class="table table-striped example" style="width:100%; margin: auto;">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>NOMBRE</th>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Tipo</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

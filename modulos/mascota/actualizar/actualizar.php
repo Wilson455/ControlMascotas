@@ -5,6 +5,7 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
+    $idMascota = $_REQUEST['idMascota'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ if (!isset($_SESSION['Usuario'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Registrar Mascota</title>
+        <title>Actualizar Mascota</title>
         <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />                        
         <link href="../../../css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/datepicker.css" rel="stylesheet" type="text/css"/>   
@@ -24,14 +25,15 @@ if (!isset($_SESSION['Usuario'])) {
         <script src="../../../js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="../../../js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <script src="../../../js/bootbox.min.js" type="text/javascript"></script>
-        <script src="js/registrar.js" type="text/javascript"></script>
+        <script src="js/actualizar.js" type="text/javascript"></script>
     </head>
     <body>
+        <input type="hidden" class="form-control" id="id" value="<?php echo $idMascota; ?>">
         <div class="container" id="datoscliente">
             <div class="row">
                 <div style="text-align: center;">
                     <div class="page-header">
-                        <h2>Registrar Mascota</h2>
+                        <h2>Actualizar Mascota #<?php echo $idMascota; ?></h2>
                     </div>
                 </div>
             </div>
@@ -89,7 +91,7 @@ if (!isset($_SESSION['Usuario'])) {
                     </div>
                     <div class="col-md-12" style="text-align: center;">
                         <div class="form-group">
-                            <button class="btn btn-success" id="btnGuardar">Registrar</button>
+                            <button class="btn btn-success" id="btnGuardar">Actualizar</button>
                         </div>
                     </div>
                 </form>

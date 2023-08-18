@@ -63,8 +63,8 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="DireccionResidencia">Direccion de Residencia</label>
-                                <input type="text" class="form-control" id="DireccionResidencia" placeholder="Ingrese la direccion de residencia" style="border-radius: 0.5rem !important;">
+                                <label for="direccionResidencia">Direccion de Residencia</label>
+                                <input type="text" class="form-control" id="direccionResidencia" placeholder="Ingrese la direccion de residencia" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -83,8 +83,8 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="CorreoElectronico">Correo Electronico</label>
-                                <input type="email" class="form-control" id="CorreoElectronico" placeholder="Ingrese el correo electronico" style="border-radius: 0.5rem !important;">
+                                <label for="correoElectronico">Correo Electronico</label>
+                                <input type="email" class="form-control" id="correoElectronico" placeholder="Ingrese el correo electronico" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -103,8 +103,8 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="ConfirmarContrasena">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="ConfirmarContrasena" placeholder="Ingrese el confirmar contraseña" style="border-radius: 0.5rem !important;">
+                                <label for="confirmarContrasena">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="confirmarContrasena" placeholder="Ingrese el confirmar contraseña" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                     </div>

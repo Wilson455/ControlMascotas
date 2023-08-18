@@ -11,10 +11,8 @@ class CapturaInformacion {
         $this->database = DataBase::getDatabaseObject(DataBase::SQL_SERVER);
     }
 
-
-	
-	 public function getDatosUsuario($_usuario) {
-        $sql = "SELECT CorreoElectronico, NombreCompleto
+	public function getDatosUsuario($_usuario) {
+        $sql = "SELECT Id, NombreCompleto, CorreoElectronico
                 FROM Usuario
                 WHERE CorreoElectronico = '" . $_usuario . "'";
         $data = $this->database->query(utf8_decode($sql));
@@ -22,7 +20,7 @@ class CapturaInformacion {
         return $data;
     }
 
-    function getTipoSolicitante() {
+    public function registrarUsuario($nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena) {
         $cp = new CapturaInformacion();
 
         $sql = "SELECT  Id_TipoSolicitante,
@@ -40,155 +38,88 @@ class CapturaInformacion {
         return $html;
     }
 
-    function getTipoReclamoUsuario() {
+    public function registrarMascota($nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento) {
         $cp = new CapturaInformacion();
 
-        $sql = "SELECT  Id_TipoReclamo,
-                        Descripcion,
-                        Estado,
-                        Id_Padre
-                FROM TipoReclamo
-                WHERE Estado='1' AND Id_Padre = 7";
-        $data = $cp->database->query($sql);
-
-        $html = "<option value ='-1'>Seleccione...</option>";
-        for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['Id_TipoReclamo'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['Descripcion'])))) . "</option>";
-        }
-
-        return $html;
-    }
-
-    function getTipoReclamoCorresponsal() {
-        $cp = new CapturaInformacion();
-
-        $sql = "SELECT  Id_TipoReclamo,
-                        Descripcion,
-                        Estado,
-                        Id_Padre
-                FROM TipoReclamo
-                WHERE Estado='1' AND Id_Padre = 1";
-        $data = $cp->database->query(utf8_decode($sql));
-	
-        $html = "<option value ='-1'>Seleccione...</option>";
-        for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['Id_TipoReclamo'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['Descripcion'])))) . "</option>";
-        }
-
-        return $html;
-    }
-
-    function getTipoReclamoPorId($Id) {
-        $cp = new CapturaInformacion();
-
-        $sql = "SELECT  Id_TipoReclamo,
-                        Descripcion,
-                        Estado,
-                        Id_Padre
-                FROM TipoReclamo
-                WHERE Estado='1' AND Id_Padre='" . $Id . "'";
-        $data = $cp->database->query($sql);
-        if ($data) {
-            $html = "<option value ='-1'>Seleccione...</option>";
-            for ($i = 0; $i < count($data); $i++) {
-                $html .= "<option value='" . $data [$i]['Id_TipoReclamo'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['Descripcion'])))) . "</option>";
-            }
-        }
-
-        return $html;
-    }
-
-    function getTipoCta() {
-        $cp = new CapturaInformacion();
-
-        $sql = "SELECT  Id_TipoCta,
+        $sql = "SELECT  Id_TipoSolicitante,
                         Descripcion,
                         Estado
-                FROM TipoCta
+                FROM TipoSolicitante
                 WHERE Estado='1'";
         $data = $cp->database->query($sql);
 
         $html = "<option value ='-1'>Seleccione...</option>";
         for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['Id_TipoCta'] . "'>" . htmlspecialchars(ltrim(rtrim($data [$i]['Descripcion']))) . "</option>";
+            $html .= "<option value='" . $data [$i]['Id_TipoSolicitante'] . "'>" . htmlspecialchars(ltrim(rtrim($data [$i]['Descripcion']))) . "</option>";
         }
 
         return $html;
     }
 
-    function getTipoTransaccion() {
+    public function consultaPerfil($idUsuario) {
+        $sql = "SELECT CorreoElectronico, NombreCompleto
+                FROM Usuario
+                WHERE CorreoElectronico = '" . $_usuario . "'";
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
+    public function listarMascotas($idUsuario) {
+        $sql = "Select  Id, Nombre, Edad, Tipo
+                From Mascota 
+                Where IdUsuario = " . $idUsuario;
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
+    public function consultarMascota($idMascota) {
+        $sql = "Select Nombre, Edad, Tipo, RasgosFisicos, TipoAlimento
+                From Mascota 
+                Where IdUsuario = " . $idMascota;
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
+    public function actualizarUsuario($idUsuario, $nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena) {
         $cp = new CapturaInformacion();
 
-        $sql = "SELECT  Id_TipoTransaccion,
+        $sql = "SELECT  Id_TipoSolicitante,
                         Descripcion,
                         Estado
-                FROM TipoTransaccion
+                FROM TipoSolicitante
                 WHERE Estado='1'";
-        $data = $cp->database->query(utf8_decode($sql));
+        $data = $cp->database->query($sql);
 
         $html = "<option value ='-1'>Seleccione...</option>";
         for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['Id_TipoTransaccion'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['Descripcion'])))) . "</option>";
+            $html .= "<option value='" . $data [$i]['Id_TipoSolicitante'] . "'>" . htmlspecialchars(ltrim(rtrim($data [$i]['Descripcion']))) . "</option>";
         }
 
         return $html;
     }
-	
 
-    function getBanco() {
+    public function actualizarMascota($idMascota, $nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento) {
         $cp = new CapturaInformacion();
 
-        $sql = "SELECT  Id_Banco,
+        $sql = "SELECT  Id_TipoSolicitante,
                         Descripcion,
                         Estado
-                FROM Bancos
+                FROM TipoSolicitante
                 WHERE Estado='1'";
-        $data = $cp->database->query(utf8_decode($sql));
+        $data = $cp->database->query($sql);
 
         $html = "<option value ='-1'>Seleccione...</option>";
         for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['Id_Banco'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['Descripcion'])))) . "</option>";
+            $html .= "<option value='" . $data [$i]['Id_TipoSolicitante'] . "'>" . htmlspecialchars(ltrim(rtrim($data [$i]['Descripcion']))) . "</option>";
         }
 
         return $html;
     }
 
-    function getDepartamentos() {
-        $cp = new CapturaInformacion();
-
-        $sql = "SELECT DISTINCT
-                       ci_cod_depto,
-                       ci_departamen
-                FROM [192.168.211.240].[Parametros].[dbo].[ciudades] order by 2 asc";
-        $data = $cp->database->query(utf8_decode($sql));
-
-        $html = "<option value ='-1'>Seleccione...</option>";
-        for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['ci_cod_depto'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['ci_departamen'])))) . "</option>";
-        }
-
-        return $html;
-    }
-
-    function getCiudades($slcDepartamento) {
-        $cp = new CapturaInformacion();
-
-        $sql = "SELECT
-                       ci_cod_ciudad,
-                       ci_ciudad
-                FROM [192.168.211.240].[Parametros].[dbo].[ciudades] 
-                WHERE ci_cod_depto='" . $slcDepartamento . "'";
-        $data = $cp->database->query(utf8_decode($sql));
-
-        $html = "<option value ='-1'>Seleccione...</option>";
-        for ($i = 0; $i < count($data); $i++) {
-            $html .= "<option value='" . $data [$i]['ci_cod_ciudad'] . "'>" . htmlspecialchars(utf8_encode(ltrim(rtrim($data [$i]['ci_ciudad'])))) . "</option>";
-        }
-
-        return $html;
-    }
-
-    function GuardarForm1($txtNombre, $slcTipoSolicitante, $txtCedula, $txtDireccion, $txtCelular, $txtCorreo, $slcTipoReclamoNvl1, $slcTipoReclamoNvl2, $txtFechaTran1, $txtHoraTran1, $txtIdenTerminal1, $txtNumTran1, $txtNomConvenioCorr, $txtNomConvenioErr, $txtValorTran1, $txtNumReferancia1, $txtNumCuentaAbono1,$txtNomConvenio2,$txtNumReferanciaErr,$txtNumReferanciaCorr, $slcTipoCta1, $slcBanco1, $txtNombreTitu1, $txtCedulaTitu1, $Usuario, $Nombre, $slcCiudad, $slcDepartamento, $txtObservacion) {
+    public function GuardarForm1($txtNombre, $slcTipoSolicitante, $txtCedula, $txtDireccion, $txtCelular, $txtCorreo, $slcTipoReclamoNvl1, $slcTipoReclamoNvl2, $txtFechaTran1, $txtHoraTran1, $txtIdenTerminal1, $txtNumTran1, $txtNomConvenioCorr, $txtNomConvenioErr, $txtValorTran1, $txtNumReferancia1, $txtNumCuentaAbono1,$txtNomConvenio2,$txtNumReferanciaErr,$txtNumReferanciaCorr, $slcTipoCta1, $slcBanco1, $txtNombreTitu1, $txtCedulaTitu1, $Usuario, $Nombre, $slcCiudad, $slcDepartamento, $txtObservacion) {
 		
         $cp = new CapturaInformacion();
 		

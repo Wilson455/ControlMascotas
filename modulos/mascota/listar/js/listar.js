@@ -1,4 +1,5 @@
-$(document).ready(function () {    
+$(document).ready(function () {   
+    listarMascotas(); 
     $('#listarMascotas').DataTable({
         destroy: true,
         ordering: false,
@@ -24,7 +25,41 @@ $(document).ready(function () {
             }
         },
     });
+
+    function listarMascotas() {
+       
+        $.ajax({
+            url: "../../../controller/CapturaInformacionController.php",
+            type: "POST",
+            datatype: "xml",
+            async: false,
+            data: ({
+                'metodo': 'listarMascotas',
+                'idUsuario': $("#idUsuario").val(),
+            }),
+            success: function (xml) {
+                $(xml).find('registro').each(function () {
+                    if ($(this).text() == 'NOEXITOSO') {
+                        $("#listarMascotas").dataTable().fnClearTable();
+                    } else {
+                        $("#listarMascotas").dataTable({destroy: true,}).fnAddData([
+                            $(this).attr('Id'),
+                            $(this).attr('Nombre'),
+                            $(this).attr('Edad'),
+                            $(this).attr('Tipo'),
+                            '<button class="btn btn-primary" onclick="editar(' + $(this).attr('Id') + ')">Editar</button>'
+                        ]);
+                    }
+                });
+            }
+        });
+    }
 });
+
 function registrar() {
     window.location = "../registrar/registrar.php";
+}
+
+function editar(idMascota) {
+    window.location = '../actualizar/actualizar.php?idMascota=' + idMascota;
 }

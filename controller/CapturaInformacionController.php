@@ -5,41 +5,32 @@ require_once('../class/CapturaInformacion.class.php');
 require_once('../class/XML.class.php');
 
 switch ($_POST['metodo']) {
-    case 'getTipoSolicitante':
-        XML::xmlResponse(getTipoSolicitante());
-        break;	
-	case 'getTipoReclamoUsuario':
-        XML::xmlResponse(getTipoReclamoUsuario());
+    case 'registrarUsuario':
+        XML::xmlResponse(registrarUsuario($_POST['nombre'], $_POST['genero'], $_POST['edad'], $_POST['direccionResidencia'], $_POST['telefono'], $_POST['correoElectronico'], $_POST['contrasena'], $_POST['confirmarContrasena']));
         break;
-    case 'getTipoReclamoCorresponsal':
-        XML::xmlResponse(getTipoReclamoCorresponsal());
+    case 'registrarMascota':
+        XML::xmlResponse(registrarMascota($_POST['nombre'], $_POST['edad'], $_POST['tipo'], $_POST['rasgosFisicos'], $_POST['tipoAlimento']));
         break;
-    case 'getTipoReclamoPorId':
-        XML::xmlResponse(getTipoReclamoPorId($_POST['Id']));
+    case 'consultaPerfil':
+        XML::xmlResponse(consultaPerfil($_POST['idUsuario']));
         break;
-    case 'getTipoCta':
-        XML::xmlResponse(getTipoCta());
+    case 'listarMascotas':
+        XML::xmlResponse(listarMascotas($_POST['idUsuario']));
         break;
-    case 'getTipoTransaccion':
-        XML::xmlResponse(getTipoTransaccion());
+    case 'consultarMascota':
+        XML::xmlResponse(consultarMascota($_POST['idMascota'],));
         break;
-    case 'getBanco':
-        XML::xmlResponse(getBanco());
+    case 'actualizarUsuario':
+        XML::xmlResponse(actualizarUsuario($_POST['idUsuario'], $_POST['nombre'], $_POST['genero'], $_POST['edad'], $_POST['direccionResidencia'], $_POST['telefono'], $_POST['correoElectronico'], $_POST['contrasena'], $_POST['confirmarContrasena']));
         break;
-    case 'getDepartamentos':
-        XML::xmlResponse(getDepartamentos());
-        break;
-    case 'getCiudades':
-        XML::xmlResponse(getCiudades($_POST['slcDepartamento']));
-        break;
-    case 'GuardarForm1':
-        XML::xmlResponse(GuardarForm1($_POST['txtNombre'], $_POST['slcTipoSolicitante'], $_POST['txtCedula'], $_POST['txtDireccion'], $_POST['txtCelular'], $_POST['txtCorreo'], $_POST['slcTipoReclamoNvl1'], $_POST['slcTipoReclamoNvl2'], $_POST['txtFechaTran1'], $_POST['txtHoraTran1'], $_POST['txtIdenTerminal1'], $_POST['txtNumTran1'], $_POST['txtNomConvenioCorr'], $_POST['txtNomConvenioErr'], $_POST['txtValorTran1'], $_POST['txtNumReferancia1'], $_POST['txtNumCuentaAbono1'],  $_POST['txtNomConvenio2'], $_POST['txtNumReferanciaErr'],$_POST['txtNumReferanciaCorr'], $_POST['slcTipoCta1'], $_POST['slcBanco1'], $_POST['txtNombreTitu1'], $_POST['txtCedulaTitu1'], $_POST['Usuario'], $_POST['Nombre'], $_POST['slcCiudad'], $_POST['slcDepartamento'], $_POST['txtObservacion']));
+    case 'actualizarMascota':
+        XML::xmlResponse(actualizarMascota($_POST['idMascota'], $_POST['nombre'], $_POST['edad'], $_POST['tipo'], $_POST['rasgosFisicos'], $_POST['tipoAlimento']));
         break;
 }
 
-function getTipoSolicitante() {
+function registrarUsuario($nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena) {
     $captura = new CapturaInformacion();
-    $data = $captura->getTipoSolicitante();
+    $data = $captura->registrarUsuario($nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena);
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
@@ -48,9 +39,9 @@ function getTipoSolicitante() {
     return $xml;
 }
 
-function getTipoReclamoUsuario() {
+function registrarMascota($nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento) {
     $captura = new CapturaInformacion();
-    $data = $captura->getTipoReclamoUsuario();
+    $data = $captura->registrarMascota($nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento);
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
@@ -59,9 +50,9 @@ function getTipoReclamoUsuario() {
     return $xml;
 }
 
-function getTipoReclamoCorresponsal() {
+function consultaPerfil($idUsuario) {
     $captura = new CapturaInformacion();
-    $data = $captura->getTipoReclamoCorresponsal();
+    $data = $captura->consultaPerfil($idUsuario);
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
@@ -70,9 +61,49 @@ function getTipoReclamoCorresponsal() {
     return $xml;
 }
 
-function getTipoReclamoPorId($Id) {
+function listarMascotas($idUsuario) {
     $captura = new CapturaInformacion();
-    $data = $captura->getTipoReclamoPorId($Id);
+    $data = $captura->listarMascotas($idUsuario);
+    if ($data) {
+        $xml .= "";
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        Id='".$data[$i]['Id']."'
+                        Nombre='".$data[$i]['Nombre']."'
+                        Edad='".$data[$i]['Edad']."'
+                        Tipo='".$data[$i]['Tipo']."'
+                    >EXITOSO</registro>";
+        }
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function consultarMascota($idMascota) {
+    $captura = new CapturaInformacion();
+    $data = $captura->consultarMascota($idMascota);
+    if ($data) {
+        $xml .= "";
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        Id='".$data[$i]['Id']."'
+                        Nombre='".$data[$i]['Nombre']."'
+                        Edad='".$data[$i]['Edad']."'
+                        Tipo='".$data[$i]['Tipo']."'
+                        RasgosFisicos='".$data[$i]['RasgosFisicos']."'
+                        TipoAlimento='".$data[$i]['TipoAlimento']."'
+                    >EXITOSO</registro>";
+        }
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function actualizarUsuario($idUsuario, $nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena) {
+    $captura = new CapturaInformacion();
+    $data = $captura->actualizarUsuario($idUsuario, $nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena);
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
@@ -81,63 +112,9 @@ function getTipoReclamoPorId($Id) {
     return $xml;
 }
 
-function getTipoCta() {
+function actualizarMascota($idMascota, $nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento) {
     $captura = new CapturaInformacion();
-    $data = $captura->getTipoCta();
-    if ($data) {
-        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
-    } else {
-        $xml = "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-
-function getTipoTransaccion() {
-    $captura = new CapturaInformacion();
-    $data = $captura->getTipoTransaccion();
-    if ($data) {
-        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
-    } else {
-        $xml = "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-function getTiposlcRetiro() {
-    $captura = new CapturaInformacion();
-    $data = $captura->getTiposlcRetiro();
-    if ($data) {
-        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
-    } else {
-        $xml = "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-
-function getBanco() {
-    $captura = new CapturaInformacion();
-    $data = $captura->getBanco();
-    if ($data) {
-        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
-    } else {
-        $xml = "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-
-function getDepartamentos() {
-    $captura = new CapturaInformacion();
-    $data = $captura->getDepartamentos();
-    if ($data) {
-        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
-    } else {
-        $xml = "<registro>NOEXITOSO</registro>";
-    }
-    return $xml;
-}
-
-function getCiudades($slcDepartamento) {
-    $captura = new CapturaInformacion();
-    $data = $captura->getCiudades($slcDepartamento);
+    $data = $captura->actualizarMascota($idMascota, $nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento);
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {
