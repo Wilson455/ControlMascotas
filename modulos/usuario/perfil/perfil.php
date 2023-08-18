@@ -120,7 +120,7 @@ if (!isset($_SESSION['Usuario'])) {
                     <div class="col-md-3"></div>
                     <div class="col-md-12" style="text-align: center;">
                         <div class="form-group">
-                            <button class="btn btn-success" id="btnGuardar">Guardar</button>
+                            <button class="btn btn-success" id="btnActualizar">Actualizar</button>
                         </div>
                     </div>
                 </form>

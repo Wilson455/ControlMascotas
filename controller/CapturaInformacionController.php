@@ -11,8 +11,8 @@ switch ($_POST['metodo']) {
     case 'registrarMascota':
         XML::xmlResponse(registrarMascota($_POST['nombre'], $_POST['edad'], $_POST['tipo'], $_POST['rasgosFisicos'], $_POST['tipoAlimento']));
         break;
-    case 'consultaPerfil':
-        XML::xmlResponse(consultaPerfil($_POST['idUsuario']));
+    case 'consultarPerfil':
+        XML::xmlResponse(consultarPerfil($_POST['idUsuario']));
         break;
     case 'listarMascotas':
         XML::xmlResponse(listarMascotas($_POST['idUsuario']));
@@ -50,11 +50,22 @@ function registrarMascota($nombre, $edad, $tipo, $rasgosFisicos, $tipoAlimento) 
     return $xml;
 }
 
-function consultaPerfil($idUsuario) {
+function consultarPerfil($idUsuario) {
     $captura = new CapturaInformacion();
-    $data = $captura->consultaPerfil($idUsuario);
+    $data = $captura->consultarPerfil($idUsuario);
     if ($data) {
-        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+        $xml .= "";
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        NombreCompleto='".$data[$i]['NombreCompleto']."'
+                        Genero='".$data[$i]['Genero']."'
+                        Edad='".$data[$i]['Edad']."'
+                        DireccionResidencia='".$data[$i]['DireccionResidencia']."'
+                        Telefono='".$data[$i]['Telefono']."'
+                        CorreoElectronico='".$data[$i]['CorreoElectronico']."'
+                        Clave='".$data[$i]['Clave']."'
+                    >EXITOSO</registro>";
+        }
     } else {
         $xml = "<registro>NOEXITOSO</registro>";
     }

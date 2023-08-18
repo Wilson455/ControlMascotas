@@ -12,9 +12,9 @@ class CapturaInformacion {
     }
 
 	public function getDatosUsuario($_usuario) {
-        $sql = "SELECT Id, NombreCompleto, CorreoElectronico
-                FROM Usuario
-                WHERE CorreoElectronico = '" . $_usuario . "'";
+        $sql = "Select Id, NombreCompleto, CorreoElectronico
+                From Usuario
+                Where CorreoElectronico = '" . $_usuario . "'";
         $data = $this->database->query(utf8_decode($sql));
 
         return $data;
@@ -56,10 +56,10 @@ class CapturaInformacion {
         return $html;
     }
 
-    public function consultaPerfil($idUsuario) {
-        $sql = "SELECT CorreoElectronico, NombreCompleto
-                FROM Usuario
-                WHERE CorreoElectronico = '" . $_usuario . "'";
+    public function consultarPerfil($idUsuario) {
+        $sql = "Select NombreCompleto, Genero, Edad, DireccionResidencia, Telefono, CorreoElectronico, Clave
+                From Usuario
+                Where Id = " . $idUsuario;
         $data = $this->database->query(utf8_decode($sql));
 
         return $data;
