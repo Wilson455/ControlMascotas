@@ -2,7 +2,6 @@ $(document).ready(function () {
     
     consultarMascota();
     
-
     $("#btnGuardar").click(function () {
         guadar();
     });
@@ -13,6 +12,14 @@ $(document).ready(function () {
 
     $("#btnProcedimientoVeterinario").click(function () {
         procedimientoVeterinario();
+    });
+
+    $("#btnIndicadorSalud").click(function () {
+        indicadorSalud();
+    });
+
+    $("#btnCondicionSalud").click(function () {
+        condicionSalud();
     });
 
     $('.tablaActualizar').DataTable({
@@ -133,5 +140,13 @@ $(document).ready(function () {
     
     function procedimientoVeterinario() {
         window.location = '../../procedimiento_veterinario/listar/listar.php';
+    }
+
+    function indicadorSalud() {
+        window.location = '../../indicador_salud/listar/listar.php';
+    }
+
+    function condicionSalud() {
+        window.location = '../../condicion_salud/listar/listar.php';
     }
 });

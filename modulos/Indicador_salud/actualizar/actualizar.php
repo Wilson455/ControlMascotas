@@ -5,6 +5,9 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
+    if ($_REQUEST['idIndicadorSalud'] != null) {
+        $_SESSION['idIndicadorSalud'] = $_REQUEST['idIndicadorSalud'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +29,14 @@ if (!isset($_SESSION['Usuario'])) {
         <script src="js/actualizar.js" type="text/javascript"></script>
     </head>
     <body>
+        <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
+        <input type="hidden" id="idMascota" value="<?php echo $_SESSION['idMascota']; ?>">
+        <input type="hidden" id="id" value="<?php echo $_SESSION['idIndicadorSalud']; ?>">
         <div class="container" id="datoscliente">
             <div class="row">
                 <div style="text-align: center;">
                     <div class="page-header">
-                        <h2>Actualizar Indicador De Salud</h2>
+                        <h2>Actualizar Indicador De Salud #<?php echo $_SESSION['idIndicadorSalud']; ?></h2>
                     </div>
                 </div>
             </div>
@@ -41,7 +47,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="peso">Peso</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el peso" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="peso" placeholder="Ingrese el peso" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -51,7 +57,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                         <div class="form-group">
                                 <label for="fechaVacunacion">Fecha De Vacunación</label>
-                                <input type="text" class="form-control" id="edad" placeholder="Ingrese la fecha de vacunación" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="fechaVacunacion" placeholder="Ingrese la fecha de vacunación" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -61,14 +67,14 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="otrosValores">Otros Valores</label>
-                                <input type="text" class="form-control" id="tipo" placeholder="Ingrese el otros valores" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="otrosValores" placeholder="Ingrese el otros valores" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
                     </div>
                     <div class="col-md-12" style="text-align: center;">
                         <div class="form-group">
-                            <button class="btn btn-success" id="btnGuardar">Registrar</button>
+                            <button class="btn btn-success" id="btnGuardar">Actualizar</button>
                         </div>
                     </div>
                 </form>

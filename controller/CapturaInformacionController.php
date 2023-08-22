@@ -24,6 +24,18 @@ switch ($_POST['metodo']) {
     case 'consultarProcedimientoVeterinario':
         XML::xmlResponse(consultarProcedimientoVeterinario($_POST['idProcedimientoVeterinario']));
         break;
+    case 'listarIndicadorSalud':
+        XML::xmlResponse(listarIndicadorSalud($_POST['idMascota']));
+        break;
+    case 'consultarIndicadorSalud':
+        XML::xmlResponse(consultarIndicadorSalud($_POST['idIndicadorSalud']));
+        break;
+    case 'listarCondicionSalud':
+        XML::xmlResponse(listarCondicionSalud($_POST['idMascota']));
+        break;
+    case 'consultarCondicionSalud':
+        XML::xmlResponse(consultarCondicionSalud($_POST['idCondicionSalud']));
+        break;
     case 'usuario':
         XML::xmlResponse(usuario($_POST['nombre'], $_POST['genero'], $_POST['edad'], $_POST['direccionResidencia'], $_POST['telefono'], $_POST['correoElectronico'], $_POST['contrasena'], $_POST['confirmarContrasena']));
         break;
@@ -47,6 +59,18 @@ switch ($_POST['metodo']) {
         break;
     case 'actualizarProcedimientoVeterinario':
         XML::xmlResponse(actualizarProcedimientoVeterinario($_POST['nombre'], $_POST['fecha'], $_POST['resultadoExamen'], $_POST['tratamiento'], $_POST['recomendacionesPertinentes'], $_POST['idProcedimientoVeterinario']));
+        break;
+    case 'registrarIndicadorSalud':
+        XML::xmlResponse(registrarIndicadorSalud($_POST['peso'], $_POST['fechaVacunacion'], $_POST['otrosValores'], $_POST['idMascota']));
+        break;
+    case 'actualizarIndicadorSalud':
+        XML::xmlResponse(actualizarIndicadorSalud($_POST['peso'], $_POST['fechaVacunacion'], $_POST['otrosValores'], $_POST['idIndicadorSalud']));
+        break;
+    case 'registrarCondicionSalud':
+        XML::xmlResponse(registrarCondicionSalud($_POST['nombre'], $_POST['descripcion'], $_POST['tratamiento'], $_POST['idMascota']));
+        break;
+    case 'actualizarCondicionSalud':
+        XML::xmlResponse(actualizarCondicionSalud($_POST['nombre'], $_POST['descripcion'], $_POST['tratamiento'], $_POST['idCondicionSalud']));
         break;
     default:
         echo "No se encontro el metodo";
@@ -190,6 +214,78 @@ function consultarProcedimientoVeterinario($idProcedimientoVeterinario) {
     return $xml;
 }
 
+function listarIndicadorSalud($idMascota) {
+    $captura = new CapturaInformacion();
+    $data = $captura->listarIndicadorSalud($idMascota);
+    $xml = "";
+    if ($data) {
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        Id='".$data[$i]['Id']."'
+                        Peso='".$data[$i]['Peso']."'
+                        FechaVacunacion='".$data[$i]['FechaVacunacion']."'
+                    >EXITOSO</registro>";
+        }
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function consultarIndicadorSalud($idIndicadorSalud) {
+    $captura = new CapturaInformacion();
+    $data = $captura->consultarIndicadorSalud($idIndicadorSalud);
+    $xml = "";
+    if ($data) {
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        Peso='".$data[$i]['Peso']."'
+                        FechaVacunacion='".$data[$i]['FechaVacunacion']."'
+                        OtrosValores='".$data[$i]['OtrosValores']."'
+                    >EXITOSO</registro>";
+        }
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function listarCondicionSalud($idMascota) {
+    $captura = new CapturaInformacion();
+    $data = $captura->listarCondicionSalud($idMascota);
+    $xml = "";
+    if ($data) {
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        Id='".$data[$i]['Id']."'
+                        Nombre='".$data[$i]['Nombre']."'
+                        Descripcion='".$data[$i]['Descripcion']."'
+                    >EXITOSO</registro>";
+        }
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function consultarCondicionSalud($idCondicionSalud) {
+    $captura = new CapturaInformacion();
+    $data = $captura->consultarCondicionSalud($idCondicionSalud);
+    $xml = "";
+    if ($data) {
+        for($i = 0; $i < count($data); $i++){
+            $xml .= "<registro
+                        Nombre='".$data[$i]['Nombre']."'
+                        Descripcion='".$data[$i]['Descripcion']."'
+                        Tratamiento='".$data[$i]['Tratamiento']."'
+                    >EXITOSO</registro>";
+        }
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
 function usuario($nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena) {
     var_dump($nombre);
     die();
@@ -273,6 +369,50 @@ function registrarProcedimientoVeterinario($nombre, $fecha, $resultadoExamen, $t
 function actualizarProcedimientoVeterinario($nombre, $fecha, $resultadoExamen, $tratamiento, $recomendacionesPertinentes, $idProcedimientoVeterinario) {
     $captura = new CapturaInformacion();
     $data = $captura->actualizarProcedimientoVeterinario($nombre, $fecha, $resultadoExamen, $tratamiento, $recomendacionesPertinentes, $idProcedimientoVeterinario);
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function registrarIndicadorSalud($peso, $fechaVacunacion, $otrosValores, $idMascota) {
+    $captura = new CapturaInformacion();
+    $data = $captura->registrarIndicadorSalud($peso, $fechaVacunacion, $otrosValores, $idMascota);
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function actualizarIndicadorSalud($peso, $fechaVacunacion, $otrosValores, $idIndicadorSalud) {
+    $captura = new CapturaInformacion();
+    $data = $captura->actualizarIndicadorSalud($peso, $fechaVacunacion, $otrosValores, $idIndicadorSalud);
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function registrarCondicionSalud($nombre, $descripcion, $tratamiento, $idMascota) {
+    $captura = new CapturaInformacion();
+    $data = $captura->registrarCondicionSalud($nombre, $descripcion, $tratamiento, $idMascota);
+    if ($data) {
+        $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
+    } else {
+        $xml = "<registro>NOEXITOSO</registro>";
+    }
+    return $xml;
+}
+
+function actualizarCondicionSalud($nombre, $descripcion, $tratamiento, $idCondicionSalud) {
+    $captura = new CapturaInformacion();
+    $data = $captura->actualizarCondicionSalud($nombre, $descripcion, $tratamiento, $idCondicionSalud);
     if ($data) {
         $xml .= "<registro><![CDATA[" . $data . "]]></registro>";
     } else {

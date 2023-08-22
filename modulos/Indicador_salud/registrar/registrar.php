@@ -26,6 +26,8 @@ if (!isset($_SESSION['Usuario'])) {
         <script src="js/registrar.js" type="text/javascript"></script>
     </head>
     <body>
+        <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
+        <input type="hidden" id="idMascota" value="<?php echo $_SESSION['idMascota']; ?>">
         <div class="container" id="datoscliente">
             <div class="row">
                 <div style="text-align: center;">
@@ -41,7 +43,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="peso">Peso</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el peso" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="peso" placeholder="Ingrese el peso" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -51,7 +53,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                         <div class="form-group">
                                 <label for="fechaVacunacion">Fecha De Vacunación</label>
-                                <input type="text" class="form-control" id="edad" placeholder="Ingrese la fecha de vacunación" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="fechaVacunacion" placeholder="Ingrese la fecha de vacunación" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -61,7 +63,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="otrosValores">Otros Valores</label>
-                                <input type="text" class="form-control" id="tipo" placeholder="Ingrese el otros valores" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="otrosValores" placeholder="Ingrese el otros valores" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>

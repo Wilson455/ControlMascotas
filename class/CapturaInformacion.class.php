@@ -83,6 +83,42 @@ class CapturaInformacion {
         return $data;
     }
 
+    public function listarIndicadorSalud($idMascota) {
+        $sql = "Select  Id,  Peso, FechaVacunacion
+                From IndicadorSalud 
+                Where IdMascota = " . $idMascota;
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
+    public function consultarIndicadorSalud($idIndicadorSalud) {
+        $sql = "Select Peso, FechaVacunacion, OtrosValores
+                From IndicadorSalud 
+                Where Id = " . $idIndicadorSalud;
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
+    public function listarCondicionSalud($idMascota) {
+        $sql = "Select  Id,  Nombre, Descripcion
+                From CondicionSalud 
+                Where IdMascota = " . $idMascota;
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
+    public function consultarCondicionSalud($idCondicionSalud) {
+        $sql = "Select Nombre, Descripcion, Tratamiento
+                From CondicionSalud 
+                Where Id = " . $idCondicionSalud;
+        $data = $this->database->query(utf8_decode($sql));
+
+        return $data;
+    }
+
     public function usuario($nombre, $genero, $edad, $direccionResidencia, $telefono, $correoElectronico, $contrasena, $confirmarContrasena) {
 
         $sql = "Insert Into Usuario(NombreCompleto, Genero, Edad, DireccionResidencia, Telefono, CorreoElectronico, Clave, FechaCreacion)Values('$nombre', '$genero', '$edad', '$direccionResidencia', '$telefono', '$correoElectronico', '$contrasena', GETDATE())";
@@ -144,6 +180,38 @@ class CapturaInformacion {
     public function actualizarProcedimientoVeterinario($nombre, $fecha, $resultadoExamen, $tratamiento, $recomendacionesPertinentes, $idProcedimientoVeterinario) {
 
         $sql = "Update ProcedimientoVeterinario Set NombreProcedimiento = '$nombre', FechaProcedimiento = '$fecha', ResultadoExamen = '$resultadoExamen', Tratamiento = '$tratamiento', RecomendacionesPertinentes = '$recomendacionesPertinentes' Where Id= " . $idProcedimientoVeterinario;
+        $data = $this->database->nonReturnQuery($sql);
+
+        return $data;
+    }
+
+    public function registrarIndicadorSalud($peso, $fechaVacunacion, $otrosValores, $idMascota) {
+
+        $sql = "Insert Into IndicadorSalud(IdMascota, Peso, FechaVacunacion, OtrosValores, FechaCreacion)Values('$idMascota','$peso', '$fechaVacunacion', '$otrosValores', GETDATE())";
+        $data = $this->database->Insert($sql);
+
+        return $data;
+    }
+
+    public function actualizarIndicadorSalud($peso, $fechaVacunacion, $otrosValores, $idIndicadorSalud) {
+
+        $sql = "Update IndicadorSalud Set Peso = '$peso', FechaVacunacion = '$fechaVacunacion', OtrosValores = '$otrosValores' Where Id= " . $idIndicadorSalud;
+        $data = $this->database->nonReturnQuery($sql);
+
+        return $data;
+    }
+
+    public function registrarCondicionSalud($nombre, $descripcion, $tratamiento, $idMascota) {
+
+        $sql = "Insert Into CondicionSalud(IdMascota, Nombre, Descripcion, Tratamiento, FechaCreacion)Values('$idMascota','$nombre', '$descripcion', '$tratamiento', GETDATE())";
+        $data = $this->database->Insert($sql);
+
+        return $data;
+    }
+
+    public function actualizarCondicionSalud($nombre, $descripcion, $tratamiento, $idCondicionSalud) {
+
+        $sql = "Update CondicionSalud Set Nombre = '$nombre', Descripcion = '$descripcion', Tratamiento = '$tratamiento' Where Id= " . $idCondicionSalud;
         $data = $this->database->nonReturnQuery($sql);
 
         return $data;

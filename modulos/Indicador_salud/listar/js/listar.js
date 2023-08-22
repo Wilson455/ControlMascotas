@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $('#listarControlMedico').DataTable({
+    listarIndicadorSalud();
+    $('#listarIndicadorSalud').DataTable({
         destroy: true,
         ordering: false,
         searching: false,
@@ -25,7 +26,38 @@ $(document).ready(function () {
             }
         },
     });
+    function listarIndicadorSalud() {  
+        $.ajax({
+            url: "../../../controller/CapturaInformacionController.php",
+            type: "POST",
+            datatype: "xml",
+            async: false,
+            data: ({
+                'metodo': 'listarIndicadorSalud',
+                'idMascota': $("#idMascota").val(),
+            }),
+            success: function (xml) {
+                $(xml).find('registro').each(function () {
+                    if ($(this).text() == 'NOEXITOSO') {
+                        $("#listarIndicadorSalud").dataTable().fnClearTable();
+                    } else {
+                        $("#listarIndicadorSalud").dataTable({destroy: true,}).fnAddData([
+                            $(this).attr('Id'),
+                            $(this).attr('Peso'),
+                            $(this).attr('FechaVacunacion'),
+                            '<button class="btn btn-primary" onclick="editar(' + $(this).attr('Id') + ')">Editar</button>'
+                        ]);
+                    }
+                });
+            }
+        });
+    }
 });
+
 function registrar() {
     window.location = "../registrar/registrar.php";
+}
+
+function editar(idIndicadorSalud) {
+    window.location = '../actualizar/actualizar.php?idIndicadorSalud=' + idIndicadorSalud;
 }

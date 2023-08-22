@@ -5,7 +5,7 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
-    if (!isset($_SESSION['idProcedimientoVeterinario'])) {
+    if ($_REQUEST['idProcedimientoVeterinario'] != null) {
         $_SESSION['idProcedimientoVeterinario'] = $_REQUEST['idProcedimientoVeterinario'];
     }
 ?>

@@ -5,7 +5,9 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
-    $_SESSION['idMascota'] = $_REQUEST['idMascota'];
+    if ($_REQUEST['idMascota'] != null) {
+        $_SESSION['idMascota'] = $_REQUEST['idMascota'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +39,14 @@ if (!isset($_SESSION['Usuario'])) {
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="btnControlMedico">Control Medico</button>
+                        <button class="btn btn-primary" id="btnProcedimientoVeterinario">Procedimiento Veterinario</button>
+                        <button class="btn btn-primary" id="btnIndicadorSalud">Indicador De Salud</button>
+                        <button class="btn btn-primary" id="btnCondicionSalud">Condicion De Salud</button>
+                    </div>
+                </div>
                 <form>
                     <div class="row">
                         <div class="col-md-3"></div>
@@ -95,16 +105,6 @@ if (!isset($_SESSION['Usuario'])) {
                         </div>
                     </div>
                 </form>
-                <div class="col-md-12" style="text-align: center;">
-                    <div class="form-group">
-                        <button class="btn btn-primary" id="btnControlMedico">Control Medico</button>
-                    </div>
-                </div>
-                <div class="col-md-12" style="text-align: center;">
-                    <div class="form-group">
-                        <button class="btn btn-primary" id="btnProcedimientoVeterinario">Procedimiento Veterinario</button>
-                    </div>
-                </div>
             </div>
         </div>
     </body>

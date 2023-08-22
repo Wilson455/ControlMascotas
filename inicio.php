@@ -119,7 +119,7 @@ if (!isset($_SESSION['Usuario'])) {
                                 </li>
                                 <li  id="3">
                                     <li>
-                                        <a class="Bloqueo" target="centerframe" href="modulos/plantilla-formulario/plantilla-formulario.php">
+                                        <a class="Bloqueo" target="centerframe" href="modulos/reportes/reporte.php">
                                             <i class="fa fa-list"></i> <span>Reportes</span>
                                         </a>
                                     </li>
