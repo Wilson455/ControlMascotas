@@ -1,3 +1,7 @@
+<?php
+ini_set('set_time_limit', 0);
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +19,7 @@
         <script src="../../../js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="../../../js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <script src="../../../js/bootbox.min.js" type="text/javascript"></script>
-        <script src="js/registrar.js" type="text/javascript"></script>
+        <!--<script src="js/registrar.js" type="text/javascript"></script>-->
     </head>
     <body>
         <div class="container" id="datoscliente">
@@ -27,13 +31,13 @@
                 </div>
             </div>
             <div class="row">
-                <form>
+            <form method="POST" action="../../../controller/UsuarioController.php" class="form-horizontal">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombre">Nombre Completo</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre completo" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese el nombre completo" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -43,7 +47,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="genero">Genero</label>
-                                <input type="text" class="form-control" id="genero" placeholder="Ingrese el genero" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" name="genero" id="genero" placeholder="Ingrese el genero" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -53,7 +57,7 @@
                         <div class="col-md-6">
                         <div class="form-group">
                                 <label for="edad">Edad</label>
-                                <input type="text" class="form-control" id="edad" placeholder="Ingrese la edad" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" name="edad" id="edad" placeholder="Ingrese la edad" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -63,7 +67,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="direccionResidencia">Direccion de Residencia</label>
-                                <input type="text" class="form-control" id="direccionResidencia" placeholder="Ingrese la direccion de residencia" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" name="direccionResidencia" id="direccionResidencia" placeholder="Ingrese la direccion de residencia" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -73,7 +77,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="telefono">Telefono</label>
-                                <input type="text" class="form-control" id="telefono" placeholder="Ingrese la telefono" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Ingrese la telefono" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -83,7 +87,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="correoElectronico">Correo Electronico</label>
-                                <input type="email" class="form-control" id="correoElectronico" placeholder="Ingrese el correo electronico" style="border-radius: 0.5rem !important;">
+                                <input type="email" class="form-control" name="correoElectronico" id="correoElectronico" placeholder="Ingrese el correo electronico" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -93,7 +97,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="contrasena">Contraseña</label>
-                                <input type="password" class="form-control" id="contrasena" placeholder="Ingrese el contraseña" style="border-radius: 0.5rem !important;">
+                                <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Ingrese el contraseña" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -103,7 +107,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="confirmarContrasena">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" id="confirmarContrasena" placeholder="Ingrese el confirmar contraseña" style="border-radius: 0.5rem !important;">
+                                <input type="password" class="form-control" name="confirmarContrasena" id="confirmarContrasena" placeholder="Ingrese el confirmar contraseña" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                     </div>

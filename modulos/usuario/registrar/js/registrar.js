@@ -10,7 +10,7 @@ $(document).ready(function () {
             datatype: "xml",
             async: true,
             data: ({
-                'metodo': 'usuario',
+                'metodo': 'registrarControlMedico',
                 'nombre': $("#nombre").val(),
                 'genero': $("#genero").val(),
                 'edad': $("#edad").val(),
