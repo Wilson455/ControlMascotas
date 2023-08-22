@@ -19,7 +19,7 @@ session_start();
         </style>
         <script>
             function registrar() {
-                window.location.href = "http://localhost:9990/ControlMascotas/modulos/usuario/registrar/registrar.php";
+                window.location.href = "http://192.168.1.2:9990/ControlMascotas/modulos/usuario/registrar/registrar.php";
             }
         </script>
     </head>

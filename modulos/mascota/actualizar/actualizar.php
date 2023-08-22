@@ -18,7 +18,6 @@ if (!isset($_SESSION['Usuario'])) {
         <link href="../../../css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/datepicker.css" rel="stylesheet" type="text/css"/>   
         <link href="../../../css/AdminLTE.css" rel="stylesheet" type="text/css" />      
-        <!--<link href="css/plantilla-formulario.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="../../../js/jquery1.9.js"></script>            
         <script type="text/javascript" src="../../../js/jquery.numeric.js"></script>
         <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
@@ -88,6 +87,16 @@ if (!isset($_SESSION['Usuario'])) {
                             </div>
                         </div>
                         <div class="col-md-3"></div>
+                    </div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="btnControlMedico" onclick="controlMedico()">Control Medico</button>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="text-align: center;">
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="btnProcedimientoVeterinario" onclick="procedimientoVeterinario()">Procedimiento Veterinario</button>
+                        </div>
                     </div>
                     <div class="col-md-12" style="text-align: center;">
                         <div class="form-group">

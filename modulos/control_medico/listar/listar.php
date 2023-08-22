@@ -5,6 +5,7 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
+    $idMascota = $_REQUEST['idMascota'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@ if (!isset($_SESSION['Usuario'])) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Control Medico</title>
         <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />                        
         <link href="../../../css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/datepicker.css" rel="stylesheet" type="text/css"/>   
@@ -31,18 +32,17 @@ if (!isset($_SESSION['Usuario'])) {
             <div class="row">
                 <div style="text-align: center;">
                     <div class="page-header">
-                        <h2>Mascotas registradas</h2>
+                        <h2>Controles Medicos Para La Mascota #<?php echo $idMascota; ?></h2>
                     </div>
                 </div>
             </div>
             <div style="margin: auto;text-align: center;width:50%;">
-                <table id="listarMascotas" class="table table-striped example" style="width:100%; margin: auto;">
+                <table id="listarControlMedico" class="table table-striped example" style="width:100%; margin: auto;">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Edad</th>
-                            <th>Tipo</th>
+                            <th>Nombre del Profesional</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['Usuario'])) {
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
                     <div class="form-group">
-                        <button class="btn btn-success" onclick="registrar()" id="btnRegistrar">Registrar Mascota</button>
+                        <button class="btn btn-success" onclick="registrar()" id="btnRegistrar">Registrar Control</button>
                     </div>
                 </div>
             </div>
