@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    listarProcedimientoVeterinario();
     $('#listarProcedimientoVeterinario').DataTable({
         destroy: true,
         ordering: false,
@@ -25,7 +26,37 @@ $(document).ready(function () {
             }
         },
     });
+
+    function listarProcedimientoVeterinario() {  
+        $.ajax({
+            url: "../../../controller/CapturaInformacionController.php",
+            type: "POST",
+            datatype: "xml",
+            async: false,
+            data: ({
+                'metodo': 'listarProcedimientoVeterinario',
+                'idMascota': $("#idMascota").val(),
+            }),
+            success: function (xml) {
+                $(xml).find('registro').each(function () {
+                    if ($(this).text() == 'NOEXITOSO') {
+                        $("#listarProcedimientoVeterinario").dataTable().fnClearTable();
+                    } else {
+                        $("#listarProcedimientoVeterinario").dataTable({destroy: true,}).fnAddData([
+                            $(this).attr('Id'),
+                            $(this).attr('NombreProcedimiento'),
+                            $(this).attr('FechaProcedimiento'),
+                            '<button class="btn btn-primary" onclick="editar(' + $(this).attr('Id') + ')">Editar</button>'
+                        ]);
+                    }
+                });
+            }
+        });
+    }
 });
 function registrar() {
     window.location = "../registrar/registrar.php";
+}
+function editar(idProcedimientoVeterinario) {
+    window.location = '../actualizar/actualizar.php?idProcedimientoVeterinario=' + idProcedimientoVeterinario;
 }

@@ -36,6 +36,7 @@ if (!isset($_SESSION['Usuario'])) {
             </div>
             <div class="row">
                 <form>
+                    <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
@@ -81,7 +82,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tipoAlimento">Tipo de Alimento</label>
-                                <input type="email" class="form-control" id="tipoAlimento" placeholder="Ingrese el tipo de alimento" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="tipoAlimento" placeholder="Ingrese el tipo de alimento" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>

@@ -5,7 +5,7 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
-    $idMascota = $_REQUEST['idMascota'];
+    $_SESSION['idMascota'] = $_REQUEST['idMascota'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +27,12 @@ if (!isset($_SESSION['Usuario'])) {
         <script src="js/actualizar.js" type="text/javascript"></script>
     </head>
     <body>
-        <input type="hidden" class="form-control" id="id" value="<?php echo $idMascota; ?>">
+        <input type="hidden" class="form-control" id="id" value="<?php echo $_SESSION['idMascota']; ?>">
         <div class="container" id="datoscliente">
             <div class="row">
                 <div style="text-align: center;">
                     <div class="page-header">
-                        <h2>Actualizar Mascota #<?php echo $idMascota; ?></h2>
+                        <h2>Actualizar Mascota #<?php echo $_SESSION['idMascota']; ?></h2>
                     </div>
                 </div>
             </div>
@@ -83,27 +83,28 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tipoAlimento">Tipo de Alimento</label>
-                                <input type="email" class="form-control" id="tipoAlimento" placeholder="Ingrese el tipo de alimento" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="tipoAlimento" placeholder="Ingrese el tipo de alimento" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
                     </div>
-                    <div class="col-md-12" style="text-align: center;">
-                        <div class="form-group">
-                            <button class="btn btn-primary" id="btnControlMedico" onclick="controlMedico()">Control Medico</button>
-                        </div>
-                    </div>
-                    <div class="col-md-12" style="text-align: center;">
-                        <div class="form-group">
-                            <button class="btn btn-primary" id="btnProcedimientoVeterinario" onclick="procedimientoVeterinario()">Procedimiento Veterinario</button>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-12" style="text-align: center;">
                         <div class="form-group">
                             <button class="btn btn-success" id="btnGuardar">Actualizar</button>
                         </div>
                     </div>
                 </form>
+                <div class="col-md-12" style="text-align: center;">
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="btnControlMedico">Control Medico</button>
+                    </div>
+                </div>
+                <div class="col-md-12" style="text-align: center;">
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="btnProcedimientoVeterinario">Procedimiento Veterinario</button>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

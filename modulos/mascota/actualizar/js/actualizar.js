@@ -1,6 +1,19 @@
 $(document).ready(function () {
     
     consultarMascota();
+    
+
+    $("#btnGuardar").click(function () {
+        guadar();
+    });
+
+    $("#btnControlMedico").click(function () {
+        controlMedico();
+    });
+
+    $("#btnProcedimientoVeterinario").click(function () {
+        procedimientoVeterinario();
+    });
 
     $('.tablaActualizar').DataTable({
         destroy: true,
@@ -53,14 +66,72 @@ $(document).ready(function () {
             }
         });
     }
+
+    function guadar() {
+        $.ajax({
+            url: "../../../controller/CapturaInformacionController.php",
+            type: "POST",
+            datatype: "xml",
+            async: true,
+            data: ({
+                'metodo': 'actualizarMascota',
+                'nombre': $("#nombre").val(),
+                'edad': $("#edad").val(),
+                'tipo': $("#tipo").val(),
+                'rasgosFisicos': $("#rasgosFisicos").val(),
+                'tipoAlimento': $("#tipoAlimento").val(),
+                'idMascota': $("#id").val(),
+            }),
+            beforeSend: function () {
+                bootbox.dialog({
+                    message: '<table align="center"><tr><td>Cargando...</td></tr><tr><td><img src="../../../imagenes/Cargando.gif"/></td></tr></table>',
+                    title: "Cargando"
+                });
+            },
+            success: function (xml) {
+                bootbox.hideAll();
+                $(xml).find('registro').each(function () {
+                    if ($(this).text() == 'NOEXITOSO') {
+                        bootbox.dialog({
+                            message: '<table align="center"><tr><td>Error</td></tr><tr><td>Error al actualizar.</td></tr></table>',
+                            title: "Error",
+                            buttons: {
+                                main: {
+                                    label: "Aceptar",
+                                    className: "btn-primary",
+                                    callback: function () {
+
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        console.log("Actualizado");
+                        alert("Se ha actualizado Correctamente");
+                        bootbox.dialog({
+                            message: '<table align="center"><tr><td>Se ha actualizado Correctamente</td></tr></table>',
+                            title: "Actualizado",
+                            buttons: {
+                                main: {
+                                    label: "Aceptar",
+                                    className: "btn-primary",
+                                    callback: function () {
+                                        location.href = '';
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    function controlMedico() {
+        window.location = '../../control_medico/listar/listar.php';
+    }
+    
+    function procedimientoVeterinario() {
+        window.location = '../../procedimiento_veterinario/listar/listar.php';
+    }
 });
-
-function controlMedico() {
-    var idMascota = $("#id").val();
-    window.location = '../../control_medico/listar/listar.php?idMascota=' + idMascota;
-}
-
-function procedimientoVeterinario() {
-    var idMascota = $("#id").val();
-    window.location = '../../procedimiento_veterinario/listar/listar.php?idMascota=' + idMascota;
-}

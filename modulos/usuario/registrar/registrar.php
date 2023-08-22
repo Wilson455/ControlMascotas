@@ -9,7 +9,6 @@
         <link href="../../../css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../../../css/datepicker.css" rel="stylesheet" type="text/css"/>   
         <link href="../../../css/AdminLTE.css" rel="stylesheet" type="text/css" />      
-        <!--<link href="css/plantilla-formulario.css" rel="stylesheet" type="text/css"/>-->
         <script type="text/javascript" src="../../../js/jquery1.9.js"></script>            
         <script type="text/javascript" src="../../../js/jquery.numeric.js"></script>
         <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>

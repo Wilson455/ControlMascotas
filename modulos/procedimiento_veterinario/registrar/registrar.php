@@ -34,6 +34,8 @@ if (!isset($_SESSION['Usuario'])) {
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
+            <input type="hidden" id="idMascota" value="<?php echo $_SESSION['idMascota']; ?>">
             <div class="row">
                 <form>
                     <div class="row">
@@ -41,7 +43,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombreProcedimiento">Nombre del Procedimiento</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del procedimiento" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="nombreProcedimiento" placeholder="Ingrese el nombre del procedimiento" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>
@@ -51,7 +53,7 @@ if (!isset($_SESSION['Usuario'])) {
                         <div class="col-md-6">
                         <div class="form-group">
                                 <label for="fechaProcedimiento">Fecha del Procedimiento</label>
-                                <input type="text" class="form-control" id="edad" placeholder="Ingrese la fecha del procedimiento" style="border-radius: 0.5rem !important;">
+                                <input type="text" class="form-control" id="fechaProcedimiento" placeholder="Ingrese la fecha del procedimiento" style="border-radius: 0.5rem !important;">
                             </div>
                         </div>
                         <div class="col-md-3"></div>

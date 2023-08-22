@@ -26,6 +26,8 @@ if (!isset($_SESSION['Usuario'])) {
         <script src="js/registrar.js" type="text/javascript"></script>
     </head>
     <body>
+        <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
+        <input type="hidden" id="idMascota" value="<?php echo $_SESSION['idMascota']; ?>">
         <div class="container" id="datoscliente">
             <div class="row">
                 <div style="text-align: center;">

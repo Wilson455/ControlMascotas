@@ -10,7 +10,7 @@ $(document).ready(function () {
             datatype: "xml",
             async: true,
             data: ({
-                'metodo': 'registrarUsuario',
+                'metodo': 'usuario',
                 'nombre': $("#nombre").val(),
                 'genero': $("#genero").val(),
                 'edad': $("#edad").val(),
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 'telefono': $("#telefono").val(),
                 'correoElectronico': $("#correoElectronico").val(),
                 'contrasena': $("#contrasena").val(),
-                'confirmarContrasena': $("#confirmarContrasena").val()
+                'confirmarContrasena': $("#confirmarContrasena").val(),
             }),
             beforeSend: function () {
                 bootbox.dialog({

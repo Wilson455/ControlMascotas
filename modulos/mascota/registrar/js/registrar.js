@@ -16,6 +16,7 @@ $(document).ready(function () {
                 'tipo': $("#tipo").val(),
                 'rasgosFisicos': $("#rasgosFisicos").val(),
                 'tipoAlimento': $("#tipoAlimento").val(),
+                'idUsuario': $("#idUsuario").val(),
             }),
             beforeSend: function () {
                 bootbox.dialog({

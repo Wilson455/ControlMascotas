@@ -43,7 +43,7 @@ session_start();
                                     <label for="usuario" class="col-md-4 control-label">Usuario:</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                            <input type="text" name="usuario" id="usuario" class="form-control text-center" autocomplete="off" />
+                                            <input type="email" name="usuario" id="usuario" class="form-control text-center" autocomplete="off" />
                                             <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
                                         </div>
                                     </div>

@@ -5,7 +5,6 @@ if (!isset($_SESSION['Usuario'])) {
     //si no existe usuario
     header('Location: ../../../pages/AccesoDenegado.php');
 }else{
-    $idMascota = $_REQUEST['idMascota'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,11 +27,12 @@ if (!isset($_SESSION['Usuario'])) {
     </head>
     <body>
         <input type="hidden" id="idUsuario" value="<?php echo $_SESSION['idUsuario']; ?>">
+        <input type="hidden" id="idMascota" value="<?php echo $_SESSION['idMascota']; ?>">
         <div class="container">
             <div class="row">
                 <div style="text-align: center;">
                     <div class="page-header">
-                        <h2>Controles Medicos Para La Mascota #<?php echo $idMascota; ?></h2>
+                        <h2>Controles Medicos Para La Mascota #<?php echo $_SESSION['idMascota']; ?></h2>
                     </div>
                 </div>
             </div>
